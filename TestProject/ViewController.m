@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UIWebViewDelegate>
+
+@property (nonatomic, strong, readonly) UIWebView *webView;
 
 @end
 
@@ -16,14 +18,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    _webView = [[UIWebView alloc] init];
+    self.webView.delegate = self;
+    [self.view addSubview:self.webView];
+
+    [self loadWebPage];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    self.webView.frame = self.view.bounds;
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Private methods
+
+- (void)loadWebPage {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://google.com"]];
+
+    [self.webView loadRequest:request];
 }
 
+#pragma mark - UIWebViewDelegate
 
 @end
