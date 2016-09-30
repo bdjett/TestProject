@@ -36,11 +36,25 @@
 #pragma mark - Private methods
 
 - (void)loadWebPage {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://disney.com"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://google.com"]];
 
     [self.webView loadRequest:request];
 }
 
 #pragma mark - UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.webView.alpha = 1;
+    }];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.webView.alpha = 0;
+    }];
+}
 
 @end
