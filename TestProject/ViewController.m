@@ -36,7 +36,7 @@
 #pragma mark - Private methods
 
 - (void)loadWebPage {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://disney.com"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://disneylife.co.uk"]];
 
     [self.webView loadRequest:request];
 }
